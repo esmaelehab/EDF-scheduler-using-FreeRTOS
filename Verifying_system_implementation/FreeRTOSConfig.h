@@ -43,19 +43,19 @@
  * See http://www.freertos.org/a00110.html
  *----------------------------------------------------------*/               
 
-#define configUSE_PREEMPTION		  1
-#define configUSE_IDLE_HOOK			  0
-#define configUSE_TICK_HOOK			  0
+#define configUSE_PREEMPTION		1
+#define configUSE_IDLE_HOOK			0
+#define configUSE_TICK_HOOK			0
 #define configCPU_CLOCK_HZ			( ( unsigned long ) 60000000 )	/* =12.0MHz xtal multiplied by 5 using the PLL. */
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES		( 4 )
 #define configMINIMAL_STACK_SIZE	( ( unsigned short ) 90 )
 #define configTOTAL_HEAP_SIZE		( ( size_t ) 13 * 1024 )
-#define configMAX_TASK_NAME_LEN	( 8 )
+#define configMAX_TASK_NAME_LEN  	( 8 )
 #define configUSE_TRACE_FACILITY	0
 #define configUSE_16_BIT_TICKS		0
 #define configIDLE_SHOULD_YIELD		0
-#define configUSE_TIME_SLICING    1 
+#define configUSE_TIME_SLICING           1
 #define configSUPPORT_DYNAMIC_ALLOCATION 1
 #define configUSE_MUTEXES                1
 #define configUSE_APPLICATION_TASK_TAG   1
@@ -67,64 +67,64 @@
 
 /* ONLY ONE MACRO SHOULD BE ENABLED */
 #if configUSE_TRACE_METHODS   ==  1     
-  #define configUSE_GPIOs                   0
-  #define configUSE_GPIOs_AND_TRACE_MACROS  0
-  #define configUSE_TIMER1_AND_TRACE_MACROS 0
+#define configUSE_GPIOs                   0
+#define configUSE_GPIOs_AND_TRACE_MACROS  0
+#define configUSE_TIMER1_AND_TRACE_MACROS 0
 #endif
 
 /* trace hooks definitions */
 #if ( configUSE_GPIOs_AND_TRACE_MACROS == 1 )
 
 #define traceTASK_SWITCHED_OUT()	if ((int)pxCurrentTCB->pxTaskTag == 3)\
-                                  {\
-																		GPIO_write (PORT_0, PIN3, PIN_IS_LOW);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 4)\
-                                  {\
-																		GPIO_write (PORT_0, PIN4, PIN_IS_LOW);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 5)\
-                                  {\
-																		GPIO_write (PORT_0, PIN5, PIN_IS_LOW);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 6)\
-                                  {\
-																		GPIO_write (PORT_0, PIN6, PIN_IS_LOW);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 7)\
-                                  {\
-																		GPIO_write (PORT_0, PIN7, PIN_IS_LOW);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 8)\
-                                  {\
-																		GPIO_write (PORT_0, PIN8, PIN_IS_LOW);\
-																  }																	
-																	
+		{\
+	        GPIO_write (PORT_0, PIN3, PIN_IS_LOW);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 4)\
+		{\
+			GPIO_write (PORT_0, PIN4, PIN_IS_LOW);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 5)\
+		{\
+			GPIO_write (PORT_0, PIN5, PIN_IS_LOW);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 6)\
+		{\
+			GPIO_write (PORT_0, PIN6, PIN_IS_LOW);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 7)\
+		{\
+			GPIO_write (PORT_0, PIN7, PIN_IS_LOW);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 8)\
+		{\
+			GPIO_write (PORT_0, PIN8, PIN_IS_LOW);\
+		}
+
 #define traceTASK_SWITCHED_IN()	  if ((int)pxCurrentTCB->pxTaskTag == 3)\
-                                  {\
-																		GPIO_write (PORT_0, PIN3, PIN_IS_HIGH);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 4)\
-                                  {\
-																		GPIO_write (PORT_0, PIN4, PIN_IS_HIGH);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 5)\
-                                  {\
-																		GPIO_write (PORT_0, PIN5, PIN_IS_HIGH);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 6)\
-                                  {\
-																		GPIO_write (PORT_0, PIN6, PIN_IS_HIGH);\
-																  }\
-                                  else if ((int)pxCurrentTCB->pxTaskTag == 7)\
-                                  {\
-																		GPIO_write (PORT_0, PIN7, PIN_IS_HIGH);\
-																  }\
-															    else if ((int)pxCurrentTCB->pxTaskTag == 8)\
-                                  {\
-																		GPIO_write (PORT_0, PIN8, PIN_IS_HIGH);\
-																  }																							
-																	
+		{\
+	        GPIO_write (PORT_0, PIN3, PIN_IS_HIGH);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 4)\
+		{\
+			GPIO_write (PORT_0, PIN4, PIN_IS_HIGH);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 5)\
+		{\
+			GPIO_write (PORT_0, PIN5, PIN_IS_HIGH);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 6)\
+		{\
+			GPIO_write (PORT_0, PIN6, PIN_IS_HIGH);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 7)\
+		{\
+			GPIO_write (PORT_0, PIN7, PIN_IS_HIGH);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 8)\
+		{\
+			GPIO_write (PORT_0, PIN8, PIN_IS_HIGH);\
+		}
+
 #elif ( configUSE_TIMER1_AND_TRACE_MACROS == 1 )	
 
 extern int button1_TaskInTime,  button1_TaskOutTime,  button1_TaskTotalTime;
@@ -138,83 +138,83 @@ extern int system_Time;
 extern int cpu_Load;
 
 #define traceTASK_SWITCHED_OUT()	if ((int)pxCurrentTCB->pxTaskTag == 3)\
-                                  {\
-																	  button1_TaskOutTime = T1TC;\
-																		button1_TaskTotalTime += (button1_TaskOutTime - button1_TaskInTime);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 4)\
-                                  {\
-																	  button2_TaskOutTime = T1TC;\
-																		button2_TaskTotalTime += (button2_TaskOutTime - button2_TaskInTime);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 5)\
-                                  {\
-																	  periodic_TaskOutTime = T1TC;\
-																		periodic_TaskTotalTime += (periodic_TaskOutTime - periodic_TaskInTime);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 6)\
-                                  {\
-																	  uart_TaskOutTime = T1TC;\
-																		uart_TaskTotalTime += (uart_TaskOutTime - uart_TaskInTime);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 7)\
-                                  {\
-																	  load1_TaskOutTime = T1TC;\
-																		load1_TaskTotalTime += (load1_TaskOutTime - load1_TaskInTime);\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 8)\
-                                  {\
-																	  load2_TaskOutTime = T1TC;\
-																		load2_TaskTotalTime += (load2_TaskOutTime - load2_TaskInTime);\
-																  }\
-																	system_Time = T1TC;\
-																	cpu_Load = ((  button1_TaskTotalTime + button2_TaskTotalTime\
-																	               + periodic_TaskTotalTime + uart_TaskTotalTime\
-																	               + load1_TaskTotalTime +load2_TaskTotalTime ) / (float)system_Time ) * 100;																	
-																	
+		{\
+	         button1_TaskOutTime = T1TC;\
+	         button1_TaskTotalTime += (button1_TaskOutTime - button1_TaskInTime);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 4)\
+		{\
+			button2_TaskOutTime = T1TC;\
+			button2_TaskTotalTime += (button2_TaskOutTime - button2_TaskInTime);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 5)\
+		{\
+			periodic_TaskOutTime = T1TC;\
+			periodic_TaskTotalTime += (periodic_TaskOutTime - periodic_TaskInTime);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 6)\
+		{\
+			uart_TaskOutTime = T1TC;\
+			uart_TaskTotalTime += (uart_TaskOutTime - uart_TaskInTime);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 7)\
+		{\
+			load1_TaskOutTime = T1TC;\
+			load1_TaskTotalTime += (load1_TaskOutTime - load1_TaskInTime);\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 8)\
+		{\
+			load2_TaskOutTime = T1TC;\
+			load2_TaskTotalTime += (load2_TaskOutTime - load2_TaskInTime);\
+		}\
+		system_Time = T1TC;\
+		cpu_Load = ((  button1_TaskTotalTime + button2_TaskTotalTime\
+				+ periodic_TaskTotalTime + uart_TaskTotalTime\
+				+ load1_TaskTotalTime +load2_TaskTotalTime ) / (float)system_Time ) * 100;
+
 #define traceTASK_SWITCHED_IN()	  if ((int)pxCurrentTCB->pxTaskTag == 3)\
-                                  {\
-																	  button1_TaskInTime = T1TC;\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 4)\
-                                  {\
-																	  button2_TaskInTime = T1TC;\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 5)\
-                                  {\
-																	  periodic_TaskInTime = T1TC;\
-																  }\
-																	else if ((int)pxCurrentTCB->pxTaskTag == 6)\
-                                  {\
-																	  uart_TaskInTime = T1TC;\
-																  }\
-                                  else if ((int)pxCurrentTCB->pxTaskTag == 7)\
-                                  {\
-																	  load1_TaskInTime = T1TC;\
-																  }\
-															    else if ((int)pxCurrentTCB->pxTaskTag == 8)\
-                                  {\
-																	  load2_TaskInTime = T1TC;\
-																  }	
-																	
+		{\
+	        button1_TaskInTime = T1TC;\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 4)\
+		{\
+			button2_TaskInTime = T1TC;\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 5)\
+		{\
+			periodic_TaskInTime = T1TC;\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 6)\
+		{\
+			uart_TaskInTime = T1TC;\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 7)\
+		{\
+			load1_TaskInTime = T1TC;\
+		}\
+		else if ((int)pxCurrentTCB->pxTaskTag == 8)\
+		{\
+			load2_TaskInTime = T1TC;\
+		}
+
 #endif
 
 #define configQUEUE_REGISTRY_SIZE 0
 
 /* Co-routine definitions. */
-#define configUSE_CO_ROUTINES 		        0
+#define configUSE_CO_ROUTINES 		      0
 #define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
 
 /* Set the following definitions to 1 to include the API function, or zero
 to exclude the API function. */
 
 #define INCLUDE_vTaskPrioritySet		  1
-#define INCLUDE_uxTaskPriorityGet	    1
-#define INCLUDE_vTaskDelete				    1
-#define INCLUDE_vTaskCleanUpResources	0
-#define INCLUDE_vTaskSuspend			    1
-#define INCLUDE_vTaskDelayUntil		   	1
-#define INCLUDE_vTaskDelay				    1
+#define INCLUDE_uxTaskPriorityGet	      1
+#define INCLUDE_vTaskDelete				  1
+#define INCLUDE_vTaskCleanUpResources	  0
+#define INCLUDE_vTaskSuspend			  1
+#define INCLUDE_vTaskDelayUntil		   	  1
+#define INCLUDE_vTaskDelay				  1
 
 
 
